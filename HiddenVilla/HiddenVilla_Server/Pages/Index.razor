@@ -1,10 +1,12 @@
 ﻿@page "/"
 
-<h2 class="bg-light border p-2">Frst Room</h2>
+<h2 class="bg-light border p-2">First Room</h2>
 Room: @Room.RoomName
 <br />
 Price: @Room.Price
 <br />
+
+<input type="number" @bind-value="@Room.Price" @bind-value:event="oninput" />
 
 
 @code {
