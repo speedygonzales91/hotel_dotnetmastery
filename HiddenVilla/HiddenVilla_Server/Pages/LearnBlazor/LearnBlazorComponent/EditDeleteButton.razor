@@ -1,2 +1,14 @@
-﻿<button class="btn btn-danger">Delete</button>
-<button class="btn btn-primary">Edit</button>
+﻿
+@if (IsAdmin)
+{
+    <button class="btn btn-danger">Delete</button>
+    <button class="btn btn-primary">Edit</button>
+}
+
+
+@code {
+
+    [Parameter]
+    public bool IsAdmin { get; set; }
+
+}
