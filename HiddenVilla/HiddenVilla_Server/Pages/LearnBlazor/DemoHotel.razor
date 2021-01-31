@@ -1,0 +1,67 @@
+﻿@page "/demoHotel"
+@using Model
+
+<h3>We will display Hotel rooms and amenitites here!</h3>
+<div class="border p-2 m-2" style="background-color:azure">
+    <h2 class="text-info">Room List [Using Component]</h2>
+    <div class="row container">
+        @foreach (var room in Rooms)
+        {
+        <div class="bg-light border p-2 col-5">
+            <h4 class="text-secondary">Room - @room.Id</h4>
+            <p>$@room.RoomName</p>
+            <p>$@room.Price</p>
+            <input type="checkbox" @bind-value="@room.IsActive" checked="@(room.IsActive?"checked" : null)" /> Is Active
+            <br />
+            <span>The room is @(room.IsActive ? "active" : "inactive")</span>
+            <br />
+            @if (room.IsActive)
+            {
+                @foreach (var prop in room.RoomProps)
+                {
+                    <span>@prop.Name - @prop.Value</span><br />
+                }
+            }
+            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-primary">Edit</button>
+        </div>
+        }
+    </div>
+</div>
+
+@code {
+
+    List<BlazorRoom> Rooms = new List<BlazorRoom>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Rooms.Add(new BlazorRoom
+        {
+            Id = 201,
+            RoomName = "Villa Suit One Bed Room",
+            IsActive = true,
+            Price = 399,
+            RoomProps = new List<BlazorRoomProp>()
+{
+            new BlazorRoomProp {Id = 1, Name= "Sq Feet", Value="330"},
+            new BlazorRoomProp {Id = 2, Name= "Occupancy", Value="4"},
+        }
+        });
+
+        Rooms.Add(new BlazorRoom
+        {
+            Id = 301,
+            RoomName = "Villa Suit Two Bed Room",
+            IsActive = true,
+            Price = 699,
+            RoomProps = new List<BlazorRoomProp>()
+{
+            new BlazorRoomProp {Id = 1, Name= "Sq Feet", Value="150"},
+            new BlazorRoomProp {Id = 2, Name= "Occupancy", Value="6"},
+        }
+        });
+    }
+
+}
